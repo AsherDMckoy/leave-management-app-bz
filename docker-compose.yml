@@ -23,6 +23,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db:/docker-entrypoint-initdb.d
+    command: ["bash", "/docker-entrypoint-initdb.d/init.sh"]
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d hrmDashboardDB"]
       interval: 5s
