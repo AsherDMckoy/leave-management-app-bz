@@ -22,7 +22,7 @@ COPY assets ./assets
 RUN cargo build --release
 
 # Stage 2: Runtime
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 WORKDIR /app
 
 # Install only runtime dependencies (no build tools needed)
