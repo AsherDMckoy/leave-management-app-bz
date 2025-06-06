@@ -222,16 +222,10 @@ assets/          # Static files (CSS, JS, images)
 - **UI Styles:** Edit `assets/styles/style.css` for branding and layout.
 - **Templates:** Edit HTML templates in `templates/` for UI changes.
 
-## Contribution
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Commit your changes with clear messages.
-4. Open a pull request for review.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is not licensed.
 
 ---
 
