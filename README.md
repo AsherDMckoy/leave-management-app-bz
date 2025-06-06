@@ -251,7 +251,3 @@ You can use the following prebuilt accounts to access the application immediatel
 
 ### Officer Accounts
 - For basic officer accounts, please use the "Create Employee" feature available to HR users in the application interface.
-
-## Customization
-
-- **Leave Types:** Edit the `
