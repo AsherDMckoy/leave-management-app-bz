@@ -23,7 +23,7 @@ SET row_security = off;
 CREATE SCHEMA tower_sessions;
 
 
-ALTER SCHEMA tower_sessions OWNER TO adalovelace;
+ALTER SCHEMA tower_sessions OWNER TO CURRENT_USER;
 
 --
 -- Name: leave_type; Type: TYPE; Schema: public; Owner: adalovelace
@@ -38,7 +38,7 @@ CREATE TYPE public.leave_type AS ENUM (
 );
 
 
-ALTER TYPE public.leave_type OWNER TO adalovelace;
+ALTER TYPE public.leave_type OWNER TO CURRENT_USER;
 
 --
 -- Name: role; Type: TYPE; Schema: public; Owner: adalovelace
@@ -52,7 +52,7 @@ CREATE TYPE public.role AS ENUM (
 );
 
 
-ALTER TYPE public.role OWNER TO adalovelace;
+ALTER TYPE public.role OWNER TO CURRENT_USER;
 
 --
 -- Name: status; Type: TYPE; Schema: public; Owner: adalovelace
@@ -65,7 +65,7 @@ CREATE TYPE public.status AS ENUM (
 );
 
 
-ALTER TYPE public.status OWNER TO adalovelace;
+ALTER TYPE public.status OWNER TO CURRENT_USER;
 
 SET default_tablespace = '';
 
@@ -89,7 +89,7 @@ CREATE TABLE public.leave_requests (
 );
 
 
-ALTER TABLE public.leave_requests OWNER TO adalovelace;
+ALTER TABLE public.leave_requests OWNER TO CURRENT_USER;
 
 --
 -- Name: leave_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: adalovelace
@@ -104,7 +104,7 @@ CREATE SEQUENCE public.leave_requests_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.leave_requests_id_seq OWNER TO adalovelace;
+ALTER SEQUENCE public.leave_requests_id_seq OWNER TO CURRENT_USER;
 
 --
 -- Name: leave_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adalovelace
@@ -127,7 +127,7 @@ CREATE TABLE public.notifications (
 );
 
 
-ALTER TABLE public.notifications OWNER TO adalovelace;
+ALTER TABLE public.notifications OWNER TO CURRENT_USER;
 
 --
 -- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: adalovelace
@@ -142,7 +142,7 @@ CREATE SEQUENCE public.notifications_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.notifications_id_seq OWNER TO adalovelace;
+ALTER SEQUENCE public.notifications_id_seq OWNER TO CURRENT_USER;
 
 --
 -- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adalovelace
@@ -162,7 +162,7 @@ CREATE TABLE public.teams (
 );
 
 
-ALTER TABLE public.teams OWNER TO adalovelace;
+ALTER TABLE public.teams OWNER TO CURRENT_USER;
 
 --
 -- Name: teams_id_seq; Type: SEQUENCE; Schema: public; Owner: adalovelace
@@ -177,7 +177,7 @@ CREATE SEQUENCE public.teams_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.teams_id_seq OWNER TO adalovelace;
+ALTER SEQUENCE public.teams_id_seq OWNER TO CURRENT_USER;
 
 --
 -- Name: teams_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adalovelace
@@ -197,7 +197,7 @@ CREATE TABLE public.user_profiles (
 );
 
 
-ALTER TABLE public.user_profiles OWNER TO adalovelace;
+ALTER TABLE public.user_profiles OWNER TO CURRENT_USER;
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: adalovelace
@@ -219,7 +219,7 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO adalovelace;
+ALTER TABLE public.users OWNER TO CURRENT_USER;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: adalovelace
@@ -234,7 +234,7 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_id_seq OWNER TO adalovelace;
+ALTER SEQUENCE public.users_id_seq OWNER TO CURRENT_USER;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adalovelace
@@ -254,7 +254,7 @@ CREATE TABLE tower_sessions.session (
 );
 
 
-ALTER TABLE tower_sessions.session OWNER TO adalovelace;
+ALTER TABLE tower_sessions.session OWNER TO CURRENT_USER;
 
 --
 -- Name: leave_requests id; Type: DEFAULT; Schema: public; Owner: adalovelace

@@ -1,31 +1,28 @@
-version: "3.9"
+version: '3.8'
 
 services:
-  db:
-    image: postgres:16
-    container_name: leave_db
-    restart: always
+  web:
+    build: .
+    ports:
+      - "8000:8000"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: leave_management_app
+      - PORT=8000
+      - DATABASE_URL=postgres://postgres:postgres@db/hrmDashboardDB
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=hrmDashboardDB
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./db:/docker-entrypoint-initdb.d
+      - ./db:/docker-entrypoint-initdb.d  # SQL dump will auto-run
     ports:
       - "5432:5432"
 
-  web:
-    build: .
-    container_name: leave_web
-    restart: always
-    depends_on:
-      - db
-    environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/leave_management_app
-    ports:
-      - "8000:8000"
-
 volumes:
   postgres_data:
-
