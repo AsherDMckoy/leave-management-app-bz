@@ -22,7 +22,7 @@ WORKDIR /app
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y openssl && \
+    apt-get install -y openssl  pkg-config libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy artifacts
