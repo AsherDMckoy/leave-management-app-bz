@@ -2,6 +2,11 @@
 FROM rust:1.70-slim AS builder
 WORKDIR /app
 
+# Install build dependencies in the BUILD stage
+RUN apt-get update && \
+    apt-get install -y pkg-config libssl-dev ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
 # Cache dependencies
 COPY Cargo.toml Cargo.lock ./
 RUN mkdir src && \
@@ -20,9 +25,9 @@ RUN cargo build --release
 FROM debian:bullseye-slim
 WORKDIR /app
 
-# Install dependencies
+# Install only runtime dependencies (no build tools needed)
 RUN apt-get update && \
-    apt-get install -y openssl  pkg-config libssl-dev && \
+    apt-get install -y openssl ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy artifacts
@@ -32,10 +37,8 @@ COPY --from=builder /app/assets /app/assets
 # COPY --from=builder /app/db /app/db
 
 # Setup permissions
-RUN chmod +x /app/hrm_app 
+RUN chmod +x /app/hrm_app
 
 ENV PORT=8000
 EXPOSE $PORT
-
 CMD ["/app/hrm_app"]
-
