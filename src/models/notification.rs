@@ -1,0 +1,11 @@
+use super::*;
+use sqlx::FromRow;
+
+#[derive(Debug, Serialize, Deserialize, FromRow)]
+pub struct Notification {
+    pub id: i32,
+    pub recipient_id: i32,
+    pub leave_request_id: i32,
+    pub message: String,
+    pub is_read: bool,
+}

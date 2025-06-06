@@ -1,0 +1,29 @@
+use super::*;
+const AUTH_TOKEN: &str = "auth-token";
+
+pub async fn login(cookies: Cookies, Form(form): Form<Credentials>) -> impl IntoResponse {
+    if form.username == "ada" && form.password == "lovelace" {
+        // Successful login, redirect to the dashboard or another page
+        cookies.add(Cookie::new(AUTH_TOKEN, "user-1.exp.sign"));
+        let mut headers = HeaderMap::new();
+        headers.insert("HX-Redirect", "/".parse().unwrap());
+        headers.into_response()
+    } else {
+        // Failed login, redirect back to the login page or show an error
+        let mut headers = HeaderMap::new();
+        headers.insert("HX-Redirect", "/authorize".parse().unwrap());
+        headers.into_response()
+    }
+}
+
+pub async fn logout(cookies: Cookies) -> impl IntoResponse {
+    cookies.remove(Cookie::from(AUTH_TOKEN));
+    let mut headers = HeaderMap::new();
+    headers.insert("HX-Redirect", "/authorize".parse().unwrap());
+    headers.into_response()
+}
+
+pub async fn login_form() -> impl IntoResponse {
+    let template = LoginTemplate { error: None };
+    HtmlTemplate(template)
+}

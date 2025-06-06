@@ -1,0 +1,50 @@
+use super::*;
+use axum::{extract::State, response::Html};
+use sqlx::PgPool;
+
+pub async fn create_notification(
+    pool: &PgPool,
+    recipient_id: i32,
+    leave_request: i32,
+    message: String,
+) -> Result<(), sqlx::Error> {
+    let query = "INSERT INTO notifications (recipient_id, leave_request_id, message, is_read) VALUES($1, $2, $3, false)";
+    let _request = sqlx::query(query)
+        .bind(recipient_id)
+        .bind(leave_request)
+        .bind(message)
+        .execute(pool)
+        .await
+        .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR));
+
+    Ok(())
+}
+
+pub async fn get_notifications(
+    State(pool): State<PgPool>,
+    auth: AuthSession,
+) -> Result<Html<String>, axum::http::StatusCode> {
+    let user = auth.user.ok_or(StatusCode::UNAUTHORIZED)?;
+    let notifications = sqlx::query_as::<_, Notification>("SELECT * FROM notifications WHERE recipient_Id = $1 AND is_read = false ORDER BY created_at DESC").bind(user.id).fetch_all(&pool).await.map_err(|_| axum::http::StatusCode::INTERNAL_SERVER_ERROR)?;
+
+    let template = NotificationsTemplate { notifications };
+    let html = template
+        .render()
+        .map_err(|_| axum::http::StatusCode::INTERNAL_SERVER_ERROR)?;
+
+    Ok(Html(html))
+}
+
+pub async fn mark_notification_read(
+    State(pool): State<PgPool>,
+    Path(notification_id): Path<i32>,
+) -> impl IntoResponse {
+    let query = "UPDATE notifications SET is_read = true WHERE id = $1";
+    let _result = sqlx::query(query)
+        .bind(notification_id)
+        .execute(&pool)
+        .await
+        .unwrap_or_default();
+
+    Html("")
+}

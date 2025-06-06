@@ -1,0 +1,20 @@
+<!-- leave_edit.html -->
+<tr data-id="{{ leave.id }}" hx-target="this" hx-swap="outerHTML">
+  <td><input type="date" name="start_date" value="{{ leave.start_date }}"></td>
+  <td><input type="date" name="end_date" value="{{ leave.end_date }}"></td>
+  <td>
+    <select name="leave_type">
+      <option value="Vacation" {% if leave.leave_type == "Vacation" %}selected{% endif %}>Vacation</option>
+      <option value="Sick" {% if leave.leave_type == "Sick" %}selected{% endif %}>Sick</option>
+      <option value="Study" {% if leave.leave_type == "Study" %}selected{% endif %}>Study</option>
+      <option value="Maternity" {% if leave.leave_type == "Maternity" %}selected{% endif %}>Maternity</option>
+      <option value="Paternity" {% if leave.leave_type == "Paternity" %}selected{% endif %}>Paternity</option>
+    </select>
+  </td>
+  <td>{{ leave.status }}</td>
+  <td><input type="text" name="comments" value="{{ leave.comments | default(value='') }}"></td>
+  <td>
+    <button hx-put="/leaves/{{ leave.id }}" hx-include="closest tr">Save</button>
+    <button hx-get="/leaves/{{ leave.id }}/edit" hx-target="closest tr">Cancel</button>
+  </td>
+</tr>

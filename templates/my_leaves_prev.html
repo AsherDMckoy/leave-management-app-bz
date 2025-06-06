@@ -1,0 +1,10 @@
+<!-- my_leaves_prev.html -->
+<div class="my_prev__details">
+  {% if leaves.len() == 0 %}
+  <span class="prev_empty">No new leave requests</span>
+  {% else %}
+  {% for leave in leaves %}
+  {% include "prev_row.html" %}
+  {% endfor %}
+  {% endif %}
+</div>

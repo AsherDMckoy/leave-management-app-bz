@@ -1,0 +1,16 @@
+<!-- leave_row.html -->
+<div class="my_prev__details__row-container grid">
+  <div class="my_prev__details__type">
+    {{ leave.leave_type }}
+  </div>
+  <div class="my_prev__details__status status-{{ leave.status }}">
+    <span class="status-icon"></span>{{ leave.status }}
+  </div>
+  <div class="my_prev__details__date subtext" id="start-date" data-start="{{ leave.start_date }}"></div>
+  <div class="my_prev__details__days flex subtext">
+    <span class="dots">..............</span>
+    <span class="days-count">{{ leave.days }} {% if leave.days == 1 %}day{% else %}days{% endif %}</span>
+  </div>
+  <div class="my_prev__details__date subtext" id="end-date" data-end="{{ leave.end_date }}"></div>
+</div>
+

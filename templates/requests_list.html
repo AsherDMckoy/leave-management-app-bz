@@ -1,0 +1,45 @@
+<!-- requests_list.html -->
+<div class="filter-controls">
+  <div class="search-box">
+    <input type="text" id="name-search" placeholder="Search by name..." class="filter-input">
+  </div>
+  <div class="date-filters">
+    <input type="date" id="start-date-filter" class="filter-input" placeholder="Start Date">
+    <input type="date" id="end-date-filter" class="filter-input" placeholder="End Date">
+  </div>
+  <div class="leave-type-filter">
+    <select id="leave-type-filter" class="filter-input">
+      <option value="">All Leave Types</option>
+      <option value="Vacation">Vacation</option>
+      <option value="Sick">Sick</option>
+      <option value="Study">Study</option>
+      <option value="Maternity">Maternity</option>
+      <option value="Paternity">Paternity</option>
+    </select>
+  </div>
+  <button id="clear-filters" class="clear-filters-btn hidden">
+    X Clear Filters
+  </button>
+</div>
+<div class="table-scroll">
+  <div class="requests_lists">
+    <table class="my_leaves_list__table">
+      <thead class="my_leaves_list__table__headers">
+        <tr>
+          <th class="subtext-header">Name</th>
+          <th class="subtext-header">Start Date</th>
+          <th class="subtext-header">End Date</th>
+          <th class="subtext-header">Days</th>
+          <th class="subtext-header">Leave Type</th>
+          <th class="subtext-header">Comment</th>
+          <th class="subtext-header">Status</th>
+        </tr>
+      </thead>
+      <tbody hx-target="closest tr" hx-swap="outerHTML swap:1s">
+        {% for request in requests %}
+        {% include "requests_list_row.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

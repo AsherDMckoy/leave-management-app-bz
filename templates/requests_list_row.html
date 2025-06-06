@@ -1,0 +1,16 @@
+<!-- request_row.html -->
+<tr id="request-list-row">
+  <td>{{ request.name }}</td>
+  <td data-start-date="{{ request.start_date }}"><span class="icon-container list-icon"><img src="/assets/icons/calendar-date-icon.png"/></span>{{ request.print_start_date() }}</td>
+  <td data-end-date="{{ request.end_date }}"><span class="icon-container list-icon"><img src="/assets/icons/calendar-date-icon.png"/></span>{{ request.print_end_date() }}</td>
+  <td>{{ request.days }}</td>
+  <td>{{ request.leave_type }}</td>
+    <td>
+    {% if let Some(comment) = request.comments %}
+    {% if !comment.is_empty() %}
+    {{ comment }}
+    {% endif %}
+    {% endif %}
+    </td>
+  <td class="my_prev__details__status status-{{ request_status }}"><span class="status-icon"></span>{{ request_status }}</td>
+ </tr>

@@ -1,0 +1,18 @@
+{
+  "name": "hrm_dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard app to request and approve leave and manage professional team calendar",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js && npm run build:html",
+    "build:css": "cssnano src/frontend/css/styles.css dist/css/styles.min.css",
+    "build:js": "terser src/frontend/js/app.js -o dist/js/app.min.js",
+    "build:html": "html-minifier-terser src/frontend/index.html -o dist/index.html --collapse-whitespace --remove-comments"
+  },
+  "author": "Asher D. Mckoy",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^7.0.3",
+    "html-minifier-terser": "^7.2.0",
+    "terser": "^5.31.1"
+  }
+}

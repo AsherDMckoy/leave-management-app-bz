@@ -1,0 +1,33 @@
+<div class="request_form">
+<form id="new-leave" hx-post="/submit_leave">
+  <div class="flex" style="margin-bottom: 10px; gap:20px;">
+    <div class="flex col">
+      <label for="start_date">Start:</label>
+      <input type="date" id="start_date" name="start_date" min="" class="filter-input" required>
+    </div>
+    <div class="flex col">
+      <label for="end_date">End:</label>
+      <input type="date" id="end_date" name="end_date" min="" class="filter-input" required> 
+    </div>
+    <div class="flex col" style="justify-content: center;">
+      <span>Days: </span>
+      <span id="leave_days">0</span>
+      <input type="hidden" id="leave_days_payload" name="days" value="0">
+    </div>
+    <div class="flex col" style="justify-content: center;">
+      <button type="button" id="clear-dates" style="display: none;">✕</button>
+    </div>
+  </div>
+  <label for="leave_type">Type of Leave:</label> <br>
+  <select id="leave_type" name="leave_type" class="form-select" style="margin-bottom: 10px;" required>
+    <option value="">select one</option>
+    <option value="Maternity"> Maternity</option>
+    <option value="Paternity"> Paternity</option>
+    <option value="Vacation"> Vacation (PTO)</option>
+    <option value="Sick"> Sick</option>
+    <option value="Study"> Study</option>
+  </select> <br>
+  <label for="comments">Comments (optional):</label> <br>
+  <textarea style="margin-bottom: 10px;" id="comments" name="comments" rows="7" cols="40"></textarea>
+</form>
+</div>

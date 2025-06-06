@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Hrm dashboard application</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/styles/style.css" type="text/css" media="screen" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+    <script defer src="/assets/js/app.js"></script>
+    <script defer src="/assets/js/calendar.js"></script>
+    {% block head %}{% endblock %}
+    <!-- Place favicon.ico in the root directory -->
+  </head>
+  <body>
+    <div class="main-dashboard flex">
+      <!--[if lt IE 8]>
+          <p class="browserupgrade">
+            You are using an <strong>outdated</strong> browser. Please
+            <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+            your experience.
+          </p>
+          <![endif]-->
+           <aside class="main-dashboard__menu">
+             <nav class="main-dashboard__menu__nav">
+               <ul class="main-dashboard__menu__nav__list flex col list">
+                 <li >
+                   <a class="nav-item-container menu-item" hx-get="/" hx-target="#content"  hx-push-url="true" >
+		     <div aria-selected="true" class="nav-item active flex col">
+		       <span class="icon-container menu-icon">
+			 <img src="assets/icons/dashboard-icon.png" alt="Dashboard"/>
+		       </span>
+		       <span class="nav-title">Dashboard</span>
+		     </div>
+		   </a>
+                 </li>
+                 <li >
+                   <a class="nav-item-container menu-item" hx-get="/calendar" hx-target="#content"  hx-push-url="true">
+		     <div aria-selected="false" class="nav-item flex col">
+		       <span class="icon-container menu-icon">
+			 <img src="./assets/icons/calendar-icon.png" alt="Calendar"/>
+		       </span>
+		       <span class="nav-title">Calendar</span>
+		     </div>
+		   </a>
+		 </li>
+		 <li >
+		   <a class="nav-item-container menu-item" hx-get="/leaveslist" hx-target="#content"  hx-push-url="true">
+		     <div aria-selected="false" class="nav-item flex col">
+		       <span class="icon-container menu-icon">
+			 <img src="./assets/icons/myleaveslist-icon.png" alt="My Leaves"/>
+		       </span>
+		       <span class="nav-title">My Leaves</span>
+		     </div>
+		   </a>
+		 </li>
+		 {% block listItem %}{% endblock %}
+		 <li >
+		   <a class="nav-item-container menu-item" hx-get="/profile" hx-target="#content"  hx-push-url="true">
+		     <div aria-selected="false" class="nav-item flex col">
+		       <span class="icon-container menu-icon">
+			 <img src="./assets/icons/default-profile-picture.png" alt="Profile"/>
+		       </span>
+		       <span class="nav-title">Profile</span>
+		     </div>
+		   </a>
+		 </li>
+               </ul>
+             </nav>
+           </aside>
+           <div class="main-dashboard__display">
+             <header class="main-dashboard__header flex">
+               <div>
+		 <button hx-get="/" hx-target="#content" class="new-request border-round">
+                   + New Request
+		 </button>
+               </div>
+               <div>
+		 <span class="icon-container menu-icon" hx-get="/dashboard" hx-target="#content">
+		   <img src="./assets/icons/default-profile-picture.png" alt="Profile Icon"/>
+		 </span>
+               </div>
+               <div id="notification-button" hx-on:click="toggleNotifications()">
+		 <span class="icon-container menu-icon">
+		   <img src="./assets/icons/notification-bell-icon.png" alt="Notifications Button"/>
+		 </span>
+	       </div>
+               <div hx-get="/logout">
+		 <span class="icon-container menu-icon">
+		   <img src="./assets/icons/logout-icon.png" alt="Logout Button"/>
+		 </span>
+               </div>
+             </header>
+	     <!-- Notification Panel (Hidden by Default) -->
+	     <div id="notification-backdrop" class="notification-backdrop hidden"></div>
+	     <div id="notification-panel" class="notification-sideMenu hidden"
+		  data-background-request="true"
+		  hx-get="/notifications"
+		  hx-trigger="load, every 30s"
+		  hx-swap="innerHTML">
+	     </div>
+             <main class="main-dashboard__display__content" id="content">
+	       {% block content %}{% endblock %}
+             </main>
+           </div>
+    </div>
+  </body>
+</html>
+

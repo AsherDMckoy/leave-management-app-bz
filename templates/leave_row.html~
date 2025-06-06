@@ -1,0 +1,21 @@
+<!-- leave_row.html -->
+<tr>
+  <td><span class="icon-container list-icon"><img src="/assets/icons/calendar-date-icon.png"/></span>{{ leave.print_start_date() }}</td>
+  <td><span class="icon-container list-icon"><img src="/assets/icons/calendar-date-icon.png"/></span>{{ leave.print_end_date() }}</td>
+  <td>{{ leave.leave_type }}</td>
+  <td>{{ leave.days }}</td>
+  <td class="my_prev__details__status status-{{ leave.status }}"><span class="status-icon"></span>{{ leave.status }}</td>
+  <td>
+    {% if let Some(comment) = leave.comments %}
+    {% if !comment.is_empty() %}
+    {{ comment }}
+    {% endif %}
+    {% endif %}
+  </td>
+  <td>
+    <div class="my_leave_list__table____actions flex">
+      <div class="list-icon2" id="edit"  hx-get="/leave/{{ leave.id }}/edit"><img src="/assets/icons/edit-icon.png" alt="Edit"/></div>
+      <div class="list-icon2" id="delete" hx-delete="/leave/{{ leave.id }}" hx-confirm="Are you sure?"><img  src="/assets/icons/delete-icon.png" alt="Delete"/></div>
+    </div>
+  </td>
+</tr>

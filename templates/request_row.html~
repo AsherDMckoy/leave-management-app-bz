@@ -1,0 +1,16 @@
+<!-- request_row.html -->
+<tr data-id>
+  <td>{{ request.name }}</td>
+  <td>{{ request.start_date }}</td>
+  <td>{{ request.end_date }}</td>
+  <td>{{ request.days }}</td>
+  <td>{{ request.leave_type }}</td>
+    <td>
+    {% if let Some(comment) = leave.comments %}
+    {% if !comment.is_empty() %}
+    {{ comment }}
+    {% endif %}
+    {% endif %}
+    </td>
+    <td>{{ request.status }}</td>
+ </tr>

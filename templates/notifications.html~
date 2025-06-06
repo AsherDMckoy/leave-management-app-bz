@@ -1,0 +1,12 @@
+{% for notification in notifications %}
+<div class="notification" id="notification-{{ notification.id }}"
+     hx-get="/leave_requests#{{ notification.leave_request_id }}"
+     hx-target="main-content"
+     hx-swap="innerHTML">
+  <p>{{ notification.message }}</p>
+  <button class="makrk-read-btn"
+	  hx-post="/notifications/{{ notification.id }}/mark-read"
+	  hx-swap="outerHTML">
+    Mark as read </button>
+</div>
+{% endfor%}

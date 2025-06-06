@@ -1,0 +1,59 @@
+document.addEventListener("htmx:afterSettle", function (event) {
+    updateLeaveDates();
+    activateTab();
+});
+    
+function updateLeaveDates() {
+  const dateElements = document.querySelectorAll(".team_prev_details__dates");
+  dateElements.forEach(function (dateElement) {
+    let startDate = dateElement.dataset.start;
+    let endDate = dateElement.dataset.end;
+    if (startDate && endDate) {
+      dateElement.textContent = formatDate(startDate) + " - " + formatDate(endDate);
+    }
+  });
+}
+
+function formatDate(isoDate) {
+  // Split the ISO date string into components
+  const [year, month, day] = isoDate.split('-').map(num => parseInt(num, 10));
+  
+  // Create date using local timezone (months are 0-indexed in JS)
+  const date = new Date(year, month - 1, day);
+  if (isNaN(date)) {
+    console.error("Invalid date:", isoDate);
+    return isoDate;
+  }
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
+// Run initially for elements already in the DOM
+updateLeaveDates();
+
+function toggleNotifications(event) {
+    console.log("Notifications")
+  let panel = document.getElementById("notification-panel");
+    panel.classList.toggle("hidden")
+    panel.classList.toggle("visible");
+}
+function activateTab() {
+    const path = window.location.pathname;
+    let navs = document.querySelectorAll('.nav-item');
+    let activeNav;
+    navs.forEach(nav => {
+	nav.classList.remove('active');
+	nav.setAttribute('aria-selected', 'false');
+	link = nav.closest('a').getAttribute('hx-get');
+	if(link === path){
+	    console.log(path);
+	    activeNav = nav;
+	}
+    });
+    activeNav.classList.add('active');
+    activeNav.setAttribute('aria-selected', 'false');
+}
+activateTab();

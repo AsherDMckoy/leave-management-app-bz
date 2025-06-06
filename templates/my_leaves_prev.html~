@@ -1,0 +1,6 @@
+<!-- my_leaves_prev.html -->
+<div class="my_prev__details">
+    {% for leave in leaves %}
+    {% include "prev_row.html" %}
+    {% endfor %}
+</div>

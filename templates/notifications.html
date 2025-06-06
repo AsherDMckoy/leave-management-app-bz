@@ -1,0 +1,33 @@
+<div class="notification-header">
+    <h3>
+        <span class="notification-icon">
+            <img src="/assets/icons/notification-bell-icon.png" alt="Notifications"/>
+        </span>
+        Notifications
+    </h3>
+    <button class="close-notifications" onclick="toggleNotifications()">
+        <img src="/assets/icons/close-icon.png" alt="Close Notifications"/>
+    </button>
+</div>
+
+{% for notification in notifications %}
+<div class="notification {% if notification.is_read %}read{% else %}unread{% endif %}" 
+     id="notification-{{ notification.id }}"
+     hx-get="/leave_requests#{{ notification.leave_request_id }}"
+     hx-target="main-content"
+     hx-swap="innerHTML">
+    <p>{{ notification.message }}</p>
+    <button class="mark-read-btn"
+            hx-target="closest div"
+            hx-put="/notifications/{{ notification.id }}/mark-read"
+            hx-swap="outerHTML">
+        Mark as read
+    </button>
+</div>
+{% endfor %}
+
+{% if notifications.is_empty() %}
+<div class="notification-empty">
+    <p>No notifications found</p>
+</div>
+{% endif %}

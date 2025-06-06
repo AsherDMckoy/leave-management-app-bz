@@ -1,0 +1,47 @@
+<div class="content__primary my_leaves_list">
+  <h1><span class="icon-container header-icon"><img src="/assets/icons/my-leaves-header-icon.png"/></span>Leaves List</h1>
+  
+  <!-- Filter controls -->
+  <div class="filter-controls" id="filter-my-leaves-list">
+    <div class="search-box">
+      <input type="text" id="comment-search" placeholder="Search in comments..." class="filter-input">
+    </div>
+    <div class="status-filter">
+      <select id="status-filter" class="filter-input">
+        <option value="">All Statuses</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+    </div>
+    <div class="date-filters">
+      <input type="date" id="start-date-filter" class="filter-input" placeholder="Start Date">
+      <input type="date" id="end-date-filter" class="filter-input" placeholder="End Date">
+    </div>
+    <button id="clear-filters" class="clear-filters-btn hidden">
+      X Clear Filters
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-scroll">
+    <table class="my_leaves_list__table">
+      <thead class="my_leaves_list__table___headers">
+        <tr class="header_row">
+          <th class="subtext-header">Start Date</th>
+          <th class="subtext-header">End Date</th>
+          <th class="subtext-header">Leave Type</th>
+          <th class="subtext-header">Days</th>
+          <th class="subtext-header">Status</th>
+          <th class="subtext-header">Comment</th>
+          <th class="subtext-header">Action</th>
+        </tr>
+      </thead>
+      <tbody hx-target="closest tr" hx-swap="outerHTML swap:1s">
+        {% for leave in leaves %}
+        {% include "leave_row.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
