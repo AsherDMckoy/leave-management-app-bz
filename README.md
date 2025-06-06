@@ -237,19 +237,21 @@ If you prefer to run the app outside Docker:
 6. **Access the app:**
    Open your browser and go to `http://localhost:8000` (or your configured port).
 
+## Prebuilt Logins
+
+You can use the following prebuilt accounts to access the application immediately after setup:
+
+### Admin Accounts
+- **Username:** Ada64 &nbsp;&nbsp; **Password:** LaceLove
+- **Username:** Hypatia &nbsp;&nbsp; **Password:** Alexandria
+
+### Human Resources (HR) Accounts
+- **Username:** Tobi &nbsp;&nbsp; **Password:** password
+- **Username:** Bully2002 &nbsp;&nbsp; **Password:** SpideySenses
+
+### Officer Accounts
+- For basic officer accounts, please use the "Create Employee" feature available to HR users in the application interface.
+
 ## Customization
 
-- **Leave Types:** Edit the `LeaveType` enum in `src/models/leave.rs`.
-- **Roles:** Edit the `Role` enum in `src/models/user.rs`.
-- **Notification Logic:** Adjust notification triggers in `src/handlers/notification.rs`.
-- **UI Styles:** Edit `assets/styles/style.css` for branding and layout.
-- **Templates:** Edit HTML templates in `templates/` for UI changes.
-
-
-## License
-
-This project is not licensed.
-
----
-
-**For further details, see the code comments and each module's documentation. If you have questions or need help, please open an issue or contact the maintainers.** 
+- **Leave Types:** Edit the `
