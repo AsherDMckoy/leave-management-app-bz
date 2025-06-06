@@ -1,8 +1,0 @@
-<!-- team_leaves_prev.html -->
-<div class="team_prev_details">
-  {% for leave in leaves %}
-  {% include "team_prev_row.html" %}
-  {% endfor %}
-</div>
-
-

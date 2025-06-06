@@ -1,7 +1,0 @@
-<div class="scroll-container">
-   <div class="card__section flex" hx-target="closest .requests_container" hx-swap="outerHTML swap:1s">
-     {% for request in requests %}
-     {% include "leave_request_card.html" %}
-     {% endfor %}
-   </div>
-</div>
