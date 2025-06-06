@@ -135,7 +135,7 @@ assets/          # Static files (CSS, JS, images)
 ### Static Assets
 
 - **CSS:** `assets/styles/style.css` (modern, responsive, color-coded leave types, notification styles)
-- **JS:** `assets/js/app.js` (notification panel logic, HTMX triggers)
+- **JS:** `assets/js/app.js assets/js/calendar.js` (notification panel logic, calendar functionality, HTMX triggers)
 - **Icons:** `assets/icons/`
 
 ## API Endpoints
