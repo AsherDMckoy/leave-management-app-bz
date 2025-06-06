@@ -23,7 +23,7 @@ WORKDIR /app
 
 COPY --from=builder /app/target/release/hrm_app .
 
-COPY .env .env
+# COPY .env .env
 
 EXPOSE 8000
 
