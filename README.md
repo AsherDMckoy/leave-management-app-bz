@@ -12,9 +12,7 @@
 8. [Authentication & Security](#authentication--security)
 9. [Notifications System](#notifications-system)
 10. [How to Run](#how-to-run)
-11. [Customization](#customization)
-12. [Contribution](#contribution)
-13. [License](#license)
+11. [Login Access](#prebuilt-logins)
 
 ## Overview
 
