@@ -27,7 +27,7 @@ WORKDIR /app
 
 # Install runtime dependencies
 RUN apt-get update && \
-    apt-get install -y openssl ca-certificates && \
+    apt-get install -y openssl ca-certificates curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy artifacts
@@ -42,4 +42,9 @@ USER appuser
 
 ENV PORT=8000
 EXPOSE $PORT
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:${PORT}/ || exit 1
+
 CMD ["/app/hrm_app"]
