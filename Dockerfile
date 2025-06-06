@@ -18,8 +18,8 @@ RUN mkdir -p src && \
 COPY src ./src
 COPY templates ./templates
 COPY assets ./assets
-RUN touch src/main.rs && \  # Force rebuild if only templates/assets changed
-    cargo build --release
+RUN touch src/main.rs
+RUN cargo build --release
 
 # Stage 2: Runtime
 FROM debian:bookworm-slim
