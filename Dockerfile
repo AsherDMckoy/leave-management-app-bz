@@ -22,7 +22,7 @@ WORKDIR /app
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y openssl sqlite3 && \
+    apt-get install -y openssl && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy artifacts
