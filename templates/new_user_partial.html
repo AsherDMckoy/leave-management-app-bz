@@ -1,0 +1,58 @@
+<div class="content__primary">
+    <h1><span class="icon-container header-icon"><img src="./assets/icons/add-user-icon.png"/></span>Add a New User</h1>
+    <div class="profile-section">
+      <h2>User Details</h2>
+      <form 
+        hx-post="/add_user"
+        hx-target="#add-user-message"
+        hx-swap="innerHTML"
+        class="new-user-form flex"
+        >
+	<div id="user-vitals-group">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <div class="form-group">
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" name="name" required>
+          </div>
+	  <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+	  <div class="form-group">
+            <label for="user-name">User Name</label>
+            <input type="text" id="user-name" name="username" required>
+          </div>
+	  <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+	</div>
+	<div id="user-role-group">
+          <div class="form-group">
+            <label for="team-name">Team Name</label>
+	    <select id="team-name" name="team_name" class="form-select" required>
+	      <option value="">select one</option>
+	      {% for team in teams %}
+	      <option value="{{ team.name }}">{{ team.name }}</option>
+	      {% endfor %}
+	    </select>
+          </div>
+          <div class="form-group">
+            <label for="user-role">Role</label>
+	    <select id="user-role" name="role" class="form-select" required>
+	      <option value="">select one</option>
+	      <option value="Officer"> Officer</option>
+	      <option value="Admin"> Admin</option>
+	      <option value="Human_Resources"> Human Resources</option>
+	    </select>
+          </div>
+	  <div class="form-group">
+            <label for="job-title">Job Title</label>
+            <input type="text" id="job-title" name="job_title" required>
+          </div>
+          <div id="add-user-message"></div>
+          <button type="submit" class="submit-btn">Add New User</button>
+	</div>
+      </form>
+    </div>
+  </div>
