@@ -34,9 +34,16 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
+    // Add SSL requirement for production
+    let ssl_mode = if std::env::var("RENDER").is_ok() {
+        "?sslmode=require"
+    } else {
+        ""
+    };
+
     let conn_url =
         std::env::var("DATABASE_URL").expect("Env var DATABASE_URL is required for this example.");
-    let pool = PgPool::connect(&conn_url).await?;
+    let pool = PgPool::connect(&format!("{}{}", conn_url, ssl_mode)).await?;
     // let mut tx = pool.begin().await?;
     // db::load_requests(&mut tx).await?;
     // tx.commit().await?;
@@ -68,7 +75,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .layer(auth_layer)
         .fallback(handlers::fallback::fallback);
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8000")
+    let port = std::env::var("PORT")
+        .map(|p| p.parse().unwrap_or(8000))
+        .unwrap_or(8000);
+
+    let listener = tokio::net::TcpListener::bind(format!("0.0.0.0:{}", port))
         .await
         .unwrap();
     println!("Listening on 0.0.0.0:8000");
