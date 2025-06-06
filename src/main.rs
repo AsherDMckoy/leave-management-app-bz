@@ -68,10 +68,10 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .layer(auth_layer)
         .fallback(handlers::fallback::fallback);
 
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8000")
         .await
         .unwrap();
-    println!("Listening on 127.0.0.1:3000");
+    println!("Listening on 0.0.0.0:8000");
     tracing::debug!("listening on {}", listener.local_addr().unwrap());
     axum::serve(listener, app)
         .with_graceful_shutdown(shutdown_signal(deletion_task.abort_handle()))
