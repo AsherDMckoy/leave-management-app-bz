@@ -1,4 +1,3 @@
---
 -- PostgreSQL database dump
 --
 
@@ -22,16 +21,16 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO public;
 
 --
--- Name: tower_sessions; Type: SCHEMA; Schema: -; Owner: adalovelace
+-- Name: tower_sessions; Type: SCHEMA; Schema: -; Owner: postgres
 --
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE SCHEMA tower_sessions;
 
 
-ALTER SCHEMA tower_sessions OWNER TO CURRENT_USER;
+ALTER SCHEMA tower_sessions OWNER TO postgres;
 
 --
--- Name: leave_type; Type: TYPE; Schema: public; Owner: adalovelace
+-- Name: leave_type; Type: TYPE; Schema: public; Owner: postgres
 --
 
 CREATE TYPE public.leave_type AS ENUM (
@@ -43,10 +42,10 @@ CREATE TYPE public.leave_type AS ENUM (
 );
 
 
-ALTER TYPE public.leave_type OWNER TO CURRENT_USER;
+ALTER TYPE public.leave_type OWNER TO postgres;
 
 --
--- Name: role; Type: TYPE; Schema: public; Owner: adalovelace
+-- Name: role; Type: TYPE; Schema: public; Owner: postgres
 --
 
 CREATE TYPE public.role AS ENUM (
@@ -57,10 +56,10 @@ CREATE TYPE public.role AS ENUM (
 );
 
 
-ALTER TYPE public.role OWNER TO CURRENT_USER;
+ALTER TYPE public.role OWNER TO postgres;
 
 --
--- Name: status; Type: TYPE; Schema: public; Owner: adalovelace
+-- Name: status; Type: TYPE; Schema: public; Owner: postgres
 --
 
 CREATE TYPE public.status AS ENUM (
@@ -70,14 +69,14 @@ CREATE TYPE public.status AS ENUM (
 );
 
 
-ALTER TYPE public.status OWNER TO CURRENT_USER;
+ALTER TYPE public.status OWNER TO postgres;
 
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: leave_requests; Type: TABLE; Schema: public; Owner: adalovelace
+-- Name: leave_requests; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.leave_requests (
@@ -94,10 +93,10 @@ CREATE TABLE public.leave_requests (
 );
 
 
-ALTER TABLE public.leave_requests OWNER TO CURRENT_USER;
+ALTER TABLE public.leave_requests OWNER TO postgres;
 
 --
--- Name: leave_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: adalovelace
+-- Name: leave_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.leave_requests_id_seq
@@ -109,17 +108,17 @@ CREATE SEQUENCE public.leave_requests_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.leave_requests_id_seq OWNER TO CURRENT_USER;
+ALTER SEQUENCE public.leave_requests_id_seq OWNER TO postgres;
 
 --
--- Name: leave_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adalovelace
+-- Name: leave_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.leave_requests_id_seq OWNED BY public.leave_requests.id;
 
 
 --
--- Name: notifications; Type: TABLE; Schema: public; Owner: adalovelace
+-- Name: notifications; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.notifications (
@@ -132,10 +131,10 @@ CREATE TABLE public.notifications (
 );
 
 
-ALTER TABLE public.notifications OWNER TO CURRENT_USER;
+ALTER TABLE public.notifications OWNER TO postgres;
 
 --
--- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: adalovelace
+-- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.notifications_id_seq
@@ -147,17 +146,17 @@ CREATE SEQUENCE public.notifications_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.notifications_id_seq OWNER TO CURRENT_USER;
+ALTER SEQUENCE public.notifications_id_seq OWNER TO postgres;
 
 --
--- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adalovelace
+-- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.notifications_id_seq OWNED BY public.notifications.id;
 
 
 --
--- Name: teams; Type: TABLE; Schema: public; Owner: adalovelace
+-- Name: teams; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.teams (
@@ -167,10 +166,10 @@ CREATE TABLE public.teams (
 );
 
 
-ALTER TABLE public.teams OWNER TO CURRENT_USER;
+ALTER TABLE public.teams OWNER TO postgres;
 
 --
--- Name: teams_id_seq; Type: SEQUENCE; Schema: public; Owner: adalovelace
+-- Name: teams_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.teams_id_seq
@@ -182,17 +181,17 @@ CREATE SEQUENCE public.teams_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.teams_id_seq OWNER TO CURRENT_USER;
+ALTER SEQUENCE public.teams_id_seq OWNER TO postgres;
 
 --
--- Name: teams_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adalovelace
+-- Name: teams_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.teams_id_seq OWNED BY public.teams.id;
 
 
 --
--- Name: user_profiles; Type: TABLE; Schema: public; Owner: adalovelace
+-- Name: user_profiles; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.user_profiles (
@@ -202,10 +201,10 @@ CREATE TABLE public.user_profiles (
 );
 
 
-ALTER TABLE public.user_profiles OWNER TO CURRENT_USER;
+ALTER TABLE public.user_profiles OWNER TO postgres;
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: adalovelace
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.users (
@@ -224,10 +223,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO CURRENT_USER;
+ALTER TABLE public.users OWNER TO postgres;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: adalovelace
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.users_id_seq
@@ -239,17 +238,17 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_id_seq OWNER TO CURRENT_USER;
+ALTER SEQUENCE public.users_id_seq OWNER TO postgres;
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adalovelace
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: session; Type: TABLE; Schema: tower_sessions; Owner: adalovelace
+-- Name: session; Type: TABLE; Schema: tower_sessions; Owner: postgres
 --
 
 CREATE TABLE tower_sessions.session (
@@ -259,38 +258,38 @@ CREATE TABLE tower_sessions.session (
 );
 
 
-ALTER TABLE tower_sessions.session OWNER TO CURRENT_USER;
+ALTER TABLE tower_sessions.session OWNER TO postgres;
 
 --
--- Name: leave_requests id; Type: DEFAULT; Schema: public; Owner: adalovelace
+-- Name: leave_requests id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.leave_requests ALTER COLUMN id SET DEFAULT nextval('public.leave_requests_id_seq'::regclass);
 
 
 --
--- Name: notifications id; Type: DEFAULT; Schema: public; Owner: adalovelace
+-- Name: notifications id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.notifications ALTER COLUMN id SET DEFAULT nextval('public.notifications_id_seq'::regclass);
 
 
 --
--- Name: teams id; Type: DEFAULT; Schema: public; Owner: adalovelace
+-- Name: teams id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.teams ALTER COLUMN id SET DEFAULT nextval('public.teams_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: adalovelace
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
--- Data for Name: leave_requests; Type: TABLE DATA; Schema: public; Owner: adalovelace
+-- Data for Name: leave_requests; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.leave_requests (id, user_id, start_date, end_date, comments, status, leave_type, approved_by, created_at, days) FROM stdin;
@@ -305,7 +304,7 @@ COPY public.leave_requests (id, user_id, start_date, end_date, comments, status,
 
 
 --
--- Data for Name: notifications; Type: TABLE DATA; Schema: public; Owner: adalovelace
+-- Data for Name: notifications; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.notifications (id, recipient_id, leave_request_id, message, is_read, created_at) FROM stdin;
@@ -317,7 +316,7 @@ COPY public.notifications (id, recipient_id, leave_request_id, message, is_read,
 
 
 --
--- Data for Name: teams; Type: TABLE DATA; Schema: public; Owner: adalovelace
+-- Data for Name: teams; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.teams (id, name, team_lead_id) FROM stdin;
@@ -337,7 +336,7 @@ COPY public.teams (id, name, team_lead_id) FROM stdin;
 
 
 --
--- Data for Name: user_profiles; Type: TABLE DATA; Schema: public; Owner: adalovelace
+-- Data for Name: user_profiles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.user_profiles (user_id, bio, preferences) FROM stdin;
@@ -345,7 +344,7 @@ COPY public.user_profiles (user_id, bio, preferences) FROM stdin;
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: adalovelace
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.users (id, username, password_hash, email, role, name, team_id, created_at, job_title, available_leaves, used_leaves, overdue_leaves) FROM stdin;
@@ -377,7 +376,7 @@ COPY public.users (id, username, password_hash, email, role, name, team_id, crea
 
 
 --
--- Data for Name: session; Type: TABLE DATA; Schema: tower_sessions; Owner: adalovelace
+-- Data for Name: session; Type: TABLE DATA; Schema: tower_sessions; Owner: postgres
 --
 
 COPY tower_sessions.session (id, data, expiry_date) FROM stdin;
@@ -415,35 +414,35 @@ JiTev_XLZfMwCHlF-THWkA	\\x93c41090d631f945790830f365cbf5bfde242682b26178756d2d6d
 
 
 --
--- Name: leave_requests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: adalovelace
+-- Name: leave_requests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.leave_requests_id_seq', 1075, true);
 
 
 --
--- Name: notifications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: adalovelace
+-- Name: notifications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.notifications_id_seq', 184, true);
 
 
 --
--- Name: teams_id_seq; Type: SEQUENCE SET; Schema: public; Owner: adalovelace
+-- Name: teams_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.teams_id_seq', 11, true);
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: adalovelace
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.users_id_seq', 2124, true);
 
 
 --
--- Name: leave_requests leave_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: leave_requests leave_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.leave_requests
@@ -451,7 +450,7 @@ ALTER TABLE ONLY public.leave_requests
 
 
 --
--- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.notifications
@@ -459,7 +458,7 @@ ALTER TABLE ONLY public.notifications
 
 
 --
--- Name: teams teams_name_key; Type: CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: teams teams_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.teams
@@ -467,7 +466,7 @@ ALTER TABLE ONLY public.teams
 
 
 --
--- Name: teams teams_pkey; Type: CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: teams teams_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.teams
@@ -475,7 +474,7 @@ ALTER TABLE ONLY public.teams
 
 
 --
--- Name: user_profiles user_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: user_profiles user_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.user_profiles
@@ -483,7 +482,7 @@ ALTER TABLE ONLY public.user_profiles
 
 
 --
--- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users
@@ -491,7 +490,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users
@@ -499,7 +498,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users
@@ -507,7 +506,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: session session_pkey; Type: CONSTRAINT; Schema: tower_sessions; Owner: adalovelace
+-- Name: session session_pkey; Type: CONSTRAINT; Schema: tower_sessions; Owner: postgres
 --
 
 ALTER TABLE ONLY tower_sessions.session
@@ -515,14 +514,14 @@ ALTER TABLE ONLY tower_sessions.session
 
 
 --
--- Name: session_expiry_idx; Type: INDEX; Schema: tower_sessions; Owner: adalovelace
+-- Name: session_expiry_idx; Type: INDEX; Schema: tower_sessions; Owner: postgres
 --
 
 CREATE INDEX session_expiry_idx ON tower_sessions.session USING btree (expiry_date);
 
 
 --
--- Name: leave_requests leave_requests_approved_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: leave_requests leave_requests_approved_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.leave_requests
@@ -530,7 +529,7 @@ ALTER TABLE ONLY public.leave_requests
 
 
 --
--- Name: leave_requests leave_requests_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: leave_requests leave_requests_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.leave_requests
@@ -538,7 +537,7 @@ ALTER TABLE ONLY public.leave_requests
 
 
 --
--- Name: notifications notifications_leave_request_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: notifications notifications_leave_request_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.notifications
@@ -546,7 +545,7 @@ ALTER TABLE ONLY public.notifications
 
 
 --
--- Name: notifications notifications_recipient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: notifications notifications_recipient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.notifications
@@ -554,7 +553,7 @@ ALTER TABLE ONLY public.notifications
 
 
 --
--- Name: teams teams_team_lead_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: teams teams_team_lead_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.teams
@@ -562,7 +561,7 @@ ALTER TABLE ONLY public.teams
 
 
 --
--- Name: user_profiles user_profiles_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: user_profiles user_profiles_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.user_profiles
@@ -570,7 +569,7 @@ ALTER TABLE ONLY public.user_profiles
 
 
 --
--- Name: users users_team_id_dkey; Type: FK CONSTRAINT; Schema: public; Owner: adalovelace
+-- Name: users users_team_id_dkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users
