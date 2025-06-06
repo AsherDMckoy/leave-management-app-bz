@@ -44,6 +44,10 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let conn_url =
         std::env::var("DATABASE_URL").expect("Env var DATABASE_URL is required for this example.");
     let pool = PgPool::connect(&format!("{}{}", conn_url, ssl_mode)).await?;
+    sqlx::query("SELECT 1")
+        .fetch_one(&pool)
+        .await
+        .expect("Database connection failed");
     // let mut tx = pool.begin().await?;
     // db::load_requests(&mut tx).await?;
     // tx.commit().await?;
