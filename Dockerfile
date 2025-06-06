@@ -2,30 +2,30 @@
 FROM rust:1.81 AS builder
 WORKDIR /app
 
-# Install build dependencies in the BUILD stage
+# Install build dependencies
 RUN apt-get update && \
-    apt-get install -y pkg-config libssl-dev ca-certificates && \
+    apt-get install -y pkg-config libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Cache dependencies
 COPY Cargo.toml Cargo.lock ./
-RUN mkdir src && \
-    echo "fn main() {}" > src/main.rs && \
+RUN mkdir -p src && \
+    echo "fn main() {println!(\"dummy main\")}" > src/main.rs && \
     cargo build --release && \
     rm -rf src
 
-# Copy source and build
+# Copy real source
 COPY src ./src
 COPY templates ./templates
 COPY assets ./assets
-# COPY db ./db
-RUN cargo build --release
+RUN touch src/main.rs && \  # Force rebuild if only templates/assets changed
+    cargo build --release
 
 # Stage 2: Runtime
 FROM debian:bookworm-slim
 WORKDIR /app
 
-# Install only runtime dependencies (no build tools needed)
+# Install runtime dependencies
 RUN apt-get update && \
     apt-get install -y openssl ca-certificates && \
     rm -rf /var/lib/apt/lists/*
@@ -34,10 +34,11 @@ RUN apt-get update && \
 COPY --from=builder /app/target/release/hrm_app /app/hrm_app
 COPY --from=builder /app/templates /app/templates
 COPY --from=builder /app/assets /app/assets
-# COPY --from=builder /app/db /app/db
 
-# Setup permissions
-RUN chmod +x /app/hrm_app
+# Create non-root user
+RUN useradd -m appuser && \
+    chown -R appuser:appuser /app
+USER appuser
 
 ENV PORT=8000
 EXPOSE $PORT
