@@ -23,7 +23,9 @@ GRANT ALL ON SCHEMA public TO public;
 --
 -- Name: tower_sessions; Type: SCHEMA; Schema: -; Owner: postgres
 --
+SET search_path TO public;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+SET search_path TO public, tower_sessions;
 CREATE SCHEMA tower_sessions;
 
 
