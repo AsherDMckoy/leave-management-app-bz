@@ -16,10 +16,15 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+DROP SCHEMA IF EXISTS public CASCADE;
+CREATE SCHEMA public;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO public;
+
 --
 -- Name: tower_sessions; Type: SCHEMA; Schema: -; Owner: adalovelace
 --
-
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE SCHEMA tower_sessions;
 
 
