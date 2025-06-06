@@ -191,27 +191,50 @@ assets/          # Static files (CSS, JS, images)
 
 ## How to Run
 
+### Recommended: Using Docker Compose
+
+The easiest way to run the application and database is with Docker Compose. This will set up both the Rust web server and a PostgreSQL database, and automatically initialize the database using the provided SQL dump.
+
+1. **Install Docker and Docker Compose:**
+   - [Install Docker](https://docs.docker.com/get-docker/)
+   - [Install Docker Compose](https://docs.docker.com/compose/install/)
+
+2. **Start the application and database:**
+   ```sh
+   docker-compose up --build
+   ```
+   This will build the Rust application, start the web server, and launch a PostgreSQL database. The database will be initialized using the SQL dump located in the `db/` directory.
+
+3. **Access the app:**
+   Open your browser and go to `http://localhost:8000` (or your configured port).
+
+### Manual Setup (Advanced)
+
+If you prefer to run the app outside Docker:
+
 1. **Install Rust and Cargo:**  
    [Install Rust](https://www.rust-lang.org/tools/install)
 
-2. **Install dependencies:**  
+2. **Install PostgreSQL:**
+   - [Install PostgreSQL](https://www.postgresql.org/download/)
+
+3. **Set up the database using the SQL dump:**
+   - Create a new PostgreSQL database (e.g., `hrmDashboardDB`).
+   - Load the schema and initial data:
+     ```sh
+     psql -U <your_user> -d hrmDashboardDB -f db/hrm_db.sql
+     ```
+
+4. **Configure environment variables:**
+   - Set your `DATABASE_URL` and any other required settings.
+
+5. **Install dependencies and run the server:**
    ```sh
    cargo build
-   ```
-
-3. **Set up the database:**  
-   - Create a PostgreSQL database.
-   - Run migrations to create tables as per the schema above.
-
-4. **Configure environment variables:**  
-   - Set your database URL and any other required settings.
-
-5. **Run the server:**  
-   ```sh
    cargo run
    ```
 
-6. **Access the app:**  
+6. **Access the app:**
    Open your browser and go to `http://localhost:8000` (or your configured port).
 
 ## Customization
