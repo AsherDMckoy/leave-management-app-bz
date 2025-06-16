@@ -1,53 +1,52 @@
 # HRM Leave Management App
 
 ## Table of Contents
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [Architecture](#architecture)  
+4. [Database Schema](#database-schema)  
+5. [Backend Structure](#backend-structure)  
+6. [Frontend Structure](#frontend-structure)  
+7. [API Endpoints](#api-endpoints)  
+8. [Authentication & Security](#authentication--security)  
+9. [Notifications System](#notifications-system)  
+10. [How to Run](#how-to-run)  
+11. [Deployment Options](#deployment-options)  
+12. [Login Access](#prebuilt-logins)
 
-1. [Overview](#overview)
-2. [Features](#features)
-3. [Architecture](#architecture)
-4. [Database Schema](#database-schema)
-5. [Backend Structure](#backend-structure)
-6. [Frontend Structure](#frontend-structure)
-7. [API Endpoints](#api-endpoints)
-8. [Authentication & Security](#authentication--security)
-9. [Notifications System](#notifications-system)
-10. [How to Run](#how-to-run)
-11. [Login Access](#prebuilt-logins)
+---
 
-## Overview
+## 🧭 Overview
 
-The HRM Leave Management App is a web-based system for managing employee leave requests, approvals, and team leave calendars. It supports role-based access for Admins, Team Leads, Officers, and Human Resources, and provides a modern, interactive UI with real-time notifications.
+The **HRM Leave Management App** is a role-based, web-based system designed for managing employee leave workflows within small-to-medium Belizean organizations. Built with **Rust + Axum**, it features a modern UI, secure access control, real-time notifications, and a PostgreSQL backend—all orchestrated via Docker or cloud deployment.
 
-## Features
+---
 
-- **User Authentication:** Secure login/logout, password hashing (Argon2), and session management.
-- **Leave Requests:** Submit, edit, delete, and view leave requests with support for multiple leave types.
-- **Team Calendar:** Visual calendar for team leave schedules with fixed headers and scrollable member lists.
-- **Notifications:** Real-time notifications for team leads and HR about new leave requests, with the ability to mark as read.
-- **Role-Based Access:** Different views and permissions for Admin, Team Lead, Officer, and Human Resources.
-- **Filtering & Search:** Filter leave requests by status and search comments.
-- **Responsive UI:** Modern, user-friendly interface with HTMX for dynamic updates.
+## 🌟 Features
 
-## Architecture
+- ✅ Secure login/logout with session management (Argon2, axum-login)  
+- 📅 Submit/edit/delete leave requests with approval workflows  
+- 📈 Team calendar with dynamic UI via HTMX  
+- 🔔 Real-time notifications for admins and HR  
+- 🧩 Role-based access: Admins, HR, Officers (future: Team Leads)  
+- 🔍 Search and filter leave requests  
+- 📱 Fully responsive UI and modern styling  
 
-- **Backend:** Rust (Axum, SQLx, Askama)
-- **Frontend:** HTML templates (Askama), CSS, JavaScript (HTMX)
-- **Database:** PostgreSQL
+---
 
-### Folder Structure
+## 🏗️ Architecture
 
-```
-src/
-  handlers/      # Route handlers (leave, notification, profile, auth, etc.)
-  models/        # Data models (user, leave, notification, team)
-  templates.rs   # Askama template structs
-  routes.rs      # Route definitions
-  main.rs        # App entry point
-templates/       # HTML templates (Askama)
-assets/          # Static files (CSS, JS, images)
-```
+- **Backend:** Rust (Axum, SQLx, Askama)  
+- **Frontend:** Askama templates, HTMX, JS, CSS  
+- **Database:** PostgreSQL  
+- **ORM:** SQLx (chosen over Diesel for async integration, simplicity, and community support)  
+- **Security:** Serde (sanitization), Argon2 (password hashing), Tower Sessions  
+- **Containerization:** Docker + Docker Compose  
+- **Hosting (optional):** Render
 
-## Database Schema
+---
+
+## 📚 Database Schema
 
 ### users
 
@@ -55,7 +54,7 @@ assets/          # Static files (CSS, JS, images)
 |-------------|---------|-----------------------|
 | id          | int     | Primary key           |
 | username    | string  | Unique user name      |
-| password    | string  | Argon2 password hash  |
+| password_hash    | string  | Argon2 password hash  |
 | email       | string  | Email address         |
 | role        | string  | User role             |
 | name        | string  | Full name             |
@@ -93,50 +92,27 @@ assets/          # Static files (CSS, JS, images)
 | name        | string  | Team name             |
 | team_lead_id| int     | User ID of team lead  |
 
-## Backend Structure
+## 🧱 Backend Structure
 
-### Models (`src/models/`)
+- `handlers/`: Route controllers  
+- `models/`: Database-bound structs  
+- `templates.rs`: Askama template bindings  
+- `routes.rs`: Route-to-handler map  
+- `main.rs`: App entrypoint  
+- `profile.rs`: User profile and password change logic
 
-- **user.rs:** User struct, roles, authentication logic.
-- **leave.rs:** Leave request types, status, and data structures.
-- **notification.rs:** Notification struct for user alerts.
-- **team.rs:** Team and team member structs.
+---
 
-### Handlers (`src/handlers/`)
+## 🎨 Frontend Structure
 
-- **auth.rs:** Login, logout, and session management.
-- **leave.rs:** All leave request logic (submit, update, delete, calendar, etc.).
-- **notification.rs:** Notification creation, fetching, and marking as read.
-- **profile.rs:** User profile and password change logic.
+- `templates/`: Layout and dynamic HTML (HTMX + Askama)  
+- `assets/styles/`: Custom CSS  
+- `assets/js/`: JS for notifications and calendar  
+- `assets/icons/`: Icons  
 
-### Templates (`src/templates.rs` + `templates/`)
+---
 
-- Rust structs for Askama templates.
-- HTML templates for all pages and partials.
-
-### Routing (`src/routes.rs`)
-
-- All HTTP routes and their handler bindings.
-
-## Frontend Structure
-
-### Templates
-
-- **base.html:** Main layout, navigation, notification panel.
-- **login.html:** Login form.
-- **profile.html:** User profile and password change.
-- **calendar.html:** Team leave calendar.
-- **leaves_list.html:** User's leave requests with filters.
-- **notifications.html:** Notification panel.
-- **requests.html:** Admin/HR leave request review.
-
-### Static Assets
-
-- **CSS:** `assets/styles/style.css` (modern, responsive, color-coded leave types, notification styles)
-- **JS:** `assets/js/app.js assets/js/calendar.js` (notification panel logic, calendar functionality, HTMX triggers)
-- **Icons:** `assets/icons/`
-
-## API Endpoints
+## 🔌 API Endpoints
 
 ### Authentication
 
@@ -172,80 +148,109 @@ assets/          # Static files (CSS, JS, images)
 - `GET /new_user` — Add new user form.
 - `POST /add_user` — Create a new user.
 
-## Authentication & Security
+---
 
-- **Password Hashing:** All passwords are hashed using Argon2.
-- **Session Management:** Uses axum-login for secure sessions.
-- **Role-Based Access:** Only authorized users can access certain endpoints (e.g., only HR can add users).
-- **CSRF Protection:** CSRF tokens for sensitive forms (e.g., password change, add user).
-- **Error Handling:** All database and template errors are logged and return appropriate HTTP status codes.
+## 🛡️ Authentication & Security
 
-## Notifications System
+- Passwords hashed via Argon2  
+- Session auth via `axum-login`  
+- CSRF protection via tokens  
+- Role-based route access  
+- Graceful fallback on errors  
 
-- **Creation:** Notifications are created for team leads or HR when a leave request is submitted, approved, or rejected.
-- **Fetching:** Only unread notifications are fetched and displayed.
-- **Mark as Read:** Notifications disappear from the panel when marked as read.
-- **UI:** Notification panel slides in from the side, with a bell icon indicator.
+---
 
-## How to Run
+## 🔔 Notifications System
 
-### Recommended: Using Docker Compose
+- Notifies HR/Admins on leave actions  
+- “Mark as read” toggle  
+- Fetches unread only  
+- Slide-in UI panel with icon alerts  
 
-The easiest way to run the application and database is with Docker Compose. This will set up both the Rust web server and a PostgreSQL database, and automatically initialize the database using the provided SQL dump.
+---
 
-1. **Install Docker and Docker Compose:**
-   - [Install Docker](https://docs.docker.com/get-docker/)
-   - [Install Docker Compose](https://docs.docker.com/compose/install/)
+## 🧪 How to Run
 
-2. **Start the application and database:**
-   ```sh
-   docker-compose up --build
-   ```
-   This will build the Rust application, start the web server, and launch a PostgreSQL database. The database will be initialized using the SQL dump located in the `db/` directory.
+### Getting Started - Clone the Repository if not already provided with zip file
+```bash
+git clone https://github.com/AsherDMckoy/leave-management-app-bz.git
+cd leave-management-app-bz
+```
 
-3. **Access the app:**
-   Open your browser and go to `http://localhost:8000` (or your configured port).
+###OR 
 
-### Manual Setup (Advanced)
+### Unzip provided zip repo
+```bash
+unzip hrm_app.zip
+cd hrm_app.zip
+```
 
-If you prefer to run the app outside Docker:
+### 🔁 Recommended: Docker Compose
 
-1. **Install Rust and Cargo:**  
-   [Install Rust](https://www.rust-lang.org/tools/install)
+**1. Prerequisites**  
+- [Install Docker](https://docs.docker.com/get-docker/)  
+- [Install Docker Compose](https://docs.docker.com/compose/install/)
 
-2. **Install PostgreSQL:**
-   - [Install PostgreSQL](https://www.postgresql.org/download/)
+**2. Start application**  
+```bash
+docker-compose up --build
+```
 
-3. **Set up the database using the SQL dump:**
-   - Create a new PostgreSQL database (e.g., `hrmDashboardDB`).
-   - Load the schema and initial data:
-     ```sh
-     psql -U <your_user> -d hrmDashboardDB -f db/hrm_db.sql
-     ```
+This builds the app and initializes a PostgreSQL DB using the SQL file in `/db/`.
 
-4. **Configure environment variables:**
-   - Set your `DATABASE_URL` and any other required settings.
+**3. Access the app:**  
+Go to [http://localhost:8000](http://localhost:8000)
 
-5. **Install dependencies and run the server:**
-   ```sh
-   cargo build
-   cargo run
-   ```
+---
 
-6. **Access the app:**
-   Open your browser and go to `http://localhost:8000` (or your configured port).
+### ⚙️ Manual Setup (Advanced)
 
-## Prebuilt Logins
+**1. Install** [Rust](https://www.rust-lang.org/tools/install) & PostgreSQL  
+**2. Create a DB**, then load `db/hrm_db.sql`  
+```bash
+psql -U <user> -d hrmDashboardDB -f db/hrm_db.sql
+```
 
-You can use the following prebuilt accounts to access the application immediately after setup:
+**3. Set `.env`**  
+Set `DATABASE_URL` and other env vars.
 
-### Admin Accounts
-- **Username:** Ada64 &nbsp;&nbsp; **Password:** LaceLove
-- **Username:** Hypatia &nbsp;&nbsp; **Password:** Alexandria
+**4. Run the app**  
+```bash
+cargo build
+cargo run
+```
 
-### Human Resources (HR) Accounts
-- **Username:** Tobi &nbsp;&nbsp; **Password:** password
-- **Username:** Bully2002 &nbsp;&nbsp; **Password:** SpideySenses
+---
 
-### Officer Accounts
-- For basic officer accounts, please use the "Create Employee" feature available to HR users in the application interface.
+## 🌐 Deployment Options
+
+| Method             | Description |
+|-------------------|-------------|
+| **Docker Compose** | Local deployment with bundled PostgreSQL database. |
+| **Manual Setup**   | Advanced manual setup using Rust and PostgreSQL outside Docker. |
+| **Render (Cloud Hosting)** |  
+Hosted live version of the application:  
+🔗 **[https://leave-management-app-bz.onrender.com](https://leave-management-app-bz.onrender.com)**  
+📅 **Available until July 6th, 2025**
+
+If you prefer to run the backend locally and connect to the cloud database, use the following:
+
+```bash
+DATABASE_URL=postgresql://leave_management_db_0u7z_user:GHlmym3G0sewKD08sImMAArMozCrk9W8@dpg-d11639adbo4c739mh6b0-a.oregon-postgres.render.com/leave_management_db_0u7z
+```
+
+> ⚠️ If the Render link becomes unavailable, fallback to local Docker deployment or use the manual setup method.
+
+---
+
+## 🔐 Prebuilt Logins
+
+### Admins  
+- **Ada64 / LaceLove**  
+- **Hypatia / Alexandria**
+
+### HR  
+- **Tobi / password**  
+- **Bully2002 / SpideySenses**
+
+> Officer accounts can be created via HR panel in-app.
