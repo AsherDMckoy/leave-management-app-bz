@@ -243,7 +243,7 @@ DATABASE_URL=postgresql://leave_management_db_0u7z_user:GHlmym3G0sewKD08sImMAArM
 
 ---
 
-## 🔐 Prebuilt Logins
+## 🔐 Prebuilt Logins (username / password)
 
 ### Admins  
 - **Ada64 / LaceLove**  
