@@ -181,8 +181,8 @@ cd leave-management-app-bz
 
 ### Unzip provided zip repo
 ```bash
-unzip hrm_app.zip
-cd hrm_app
+unzip leave-management-app-bz-main.zip
+cd leave-management-app-bz-main 
 ```
 
 ### 🔁 Recommended: Docker Compose
